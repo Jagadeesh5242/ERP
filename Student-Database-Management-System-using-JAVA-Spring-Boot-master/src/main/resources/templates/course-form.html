@@ -1,0 +1,132 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #ff7e5f !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #ff4e1b !important;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+            animation: fadeIn 1s ease;
+        }
+
+        .card-header {
+            background-color: #ff7e5f;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .btn {
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-info {
+            background-color: #feb47b;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #fda085;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <title>Save Course</title>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" th:href="@{/home}">CourseApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+               <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>Course Form</h3>
+            </div>
+            <div class="card-body">
+                <a th:href="@{/courses}" class="btn btn-primary btn-sm mb-3">
+                    Back to Course List
+                </a>
+
+                <p class="h4 mb-4">Save Course</p>
+
+                <form action="#" th:action="@{/courses/save}" th:object="${theCourse}" method="POST">
+                    <div class="form-group">
+                        <input type="text" th:field="*{name}" class="form-control mb-4" placeholder="Course Name" required />
+                    </div>
+                    <button type="submit" class="btn btn-info col-2">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiXtOHR3lBM58TFAyAhrqUzQfeFf3A/NxPHlDgHuJykP5fDpoT9bUkl76PbY7" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+LyLkK3AgBXk2n7J3ntw3slVVf6B1Y5mZl5V9zVRslw0b5B37EpC7zWGI" crossorigin="anonymous"></script>
+</body>
+
+</html>

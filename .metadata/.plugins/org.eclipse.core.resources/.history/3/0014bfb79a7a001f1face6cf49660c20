@@ -1,0 +1,98 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background-color: #f8f9fa;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 400px;
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h3 {
+            text-align: center;
+            margin-bottom: 20px;
+            font-weight: 500;
+            color: #343a40;
+        }
+        form input {
+            margin-bottom: 15px;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .form-control {
+            border-radius: 5px;
+            padding: 10px;
+        }
+        .text-danger {
+            text-align: center;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+    </style>
+
+    <title>Student Signup</title>
+</head>
+
+<body>
+    <div class="container">
+        <h3>Student Signup</h3>
+        <hr>
+        <!-- Error Message -->
+        <div class="text-danger" th:text="${message}"></div>
+
+        <!-- Signup Form -->
+        <form class="signup-form" action="#" 
+            th:action="@{/user/login}" 
+            th:object="${theUserLogin}" 
+            method="POST">
+
+            <!-- Username Field -->
+            <div class="form-group">
+                <input type="text" class="form-control" name="username" placeholder="Enter Username" th:field="*{username}" required>
+            </div>
+
+            <!-- Password Field -->
+            <div class="form-group">
+                <input type="password" class="form-control" name="password" placeholder="Enter Password" th:field="*{password}" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiXtOHR3lBM58TFAyAhrqUzQfeFf3A/NxPHlDgHuJykP5fDpoT9bUkl76PbY7" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+LyLkK3AgBXk2n7J3ntw3slVVf6B1Y5mZl5V9zVRslw0b5B37EpC7zWGI" crossorigin="anonymous"></script>
+</body>
+
+</html>

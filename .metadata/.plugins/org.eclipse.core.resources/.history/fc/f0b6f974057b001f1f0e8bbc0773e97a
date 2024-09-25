@@ -1,0 +1,27 @@
+package studentdbms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import studentdbms.entity.User;
+import studentdbms.service.userservice;
+
+@Controller
+@RequestMapping("/user")
+public class UserController {
+
+    @Autowired
+    private userservice uss;
+
+    // Handle sign-up submission
+    @PostMapping("/save")
+    public String saveUser(@ModelAttribute("theUser") User theUser, Model model) {
+        uss.save(theUser);
+        model.addAttribute("theUserLogin", new User());
+        return "login";  // Redirect to login page after signup
+    }
+}

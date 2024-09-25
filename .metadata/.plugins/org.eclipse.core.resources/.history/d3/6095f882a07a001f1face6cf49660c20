@@ -1,0 +1,27 @@
+package studentdbms.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import studentdbms.entity.User;
+
+@Controller
+public class HomeController {
+
+    @GetMapping("/")
+    public String showLoginPage(Model model) {
+        model.addAttribute("theUserLogin", new User());
+        return "login";  // Renders login.html as the default page
+    }
+
+    @GetMapping("/main")
+    public String showHomePage() {
+        return "home";  // This renders home.html after successful login
+    }
+    @GetMapping("/login")
+    public String showLogin1Page(Model model) {
+        // Add any required attributes to the model
+        return "login"; // This should be the name of your login HTML file (e.g., login.html)
+    }
+}

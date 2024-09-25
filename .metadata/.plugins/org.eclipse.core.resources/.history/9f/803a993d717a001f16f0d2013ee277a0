@@ -1,0 +1,32 @@
+package studentdbms.controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import studentdbms.service.UserService;
+
+@Controller
+public class AuthController {
+
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/login")
+    public String showLoginForm() {
+        return "login"; // Points to login.html
+    }
+
+    @GetMapping("/signup")
+    public String showSignupForm() {
+        return "signup"; // Points to signup.html
+    }
+
+    @PostMapping("/signup")
+    public String registerUser(String username, String password, Model model) {
+        userService.registerUser(username, password);
+        return "redirect:/login";
+    }
+}

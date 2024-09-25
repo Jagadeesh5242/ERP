@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: #fff;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #f8f9fa !important;
+        }
+
+        .container {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        h3, h4 {
+            color: #f8f9fa;
+        }
+
+        .table {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+
+        .btn {
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary {
+            background-color: #ff7e5f;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background-color: #feb47b;
+        }
+
+        .btn-sm {
+            margin-right: 5px;
+        }
+    </style>
+
+    <title>Course Details</title>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <a class="navbar-brand" th:href="@{/home}">CourseApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+                
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" th:href="@{/profile}">View Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3>Course Details</h3>
+        <hr>
+        
+        <a th:href="@{/courses}" class="btn btn-primary btn-sm">
+            Back to Course List
+        </a>
+        
+        <a th:href="@{'/reviews/add?id='+${course.id}}" class="btn btn-primary btn-sm">
+            Add Review
+        </a>
+        
+        <p class="h4 mb-4" th:text="'Course : ' + ${course.name}"></p>
+        
+        <h4 class="h4 mb-4">Course Reviews</h4>
+        
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Rating</th>
+                    <th>Description</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="temp : ${reviews}">
+                    <td th:text="${temp.id}"></td>
+                    <td th:text="${temp.rating}"></td>
+                    <td th:text="${temp.description}"></td>
+                    <td>
+                        <a th:href="@{'/reviews/remove?id='+${temp.id}+'&cid='+${course.id}}" class="btn btn-danger btn-sm">Remove Review</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <a th:href="@{'/students'}" class="btn btn-primary btn-sm">
+            Back to Student List
+        </a>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiXtOHR3lBM58TFAyAhrqUzQfeFf3A/NxPHlDgHuJykP5fDpoT9bUkl76PbY7" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+LyLkK3AgBXk2n7J3ntw3slVVf6B1Y5mZl5V9zVRslw0b5B37EpC7zWGI" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,11 @@
+package studentdbms.repository;
+
+import org.hibernate.usertype.UserType;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import studentdbms.entity.User;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    UserType findByUsername(String username);
+}

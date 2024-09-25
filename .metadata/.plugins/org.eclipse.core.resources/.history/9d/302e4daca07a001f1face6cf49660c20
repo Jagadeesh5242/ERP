@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Signup</title>
+
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+            max-width: 500px;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #007bff;
+        }
+        .form-control {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: #fff;
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        .back-link {
+            display: block;
+            margin-bottom: 20px;
+            text-align: right;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <a th:href="@{/login}" class="back-link btn btn-link">Back to Login</a>
+        <h2>Signup</h2>
+
+        <form th:action="@{/user/save}" th:object="${theUser}" method="POST">
+            <input type="text" name="username" class="form-control" placeholder="Username" th:field="*{username}" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" th:field="*{password}" required>
+
+            <button type="submit" class="btn-custom">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Optional Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" 
+    integrity="sha384-apNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j2VMF4zvRIZFnC7BbDSP" 
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" 
+    integrity="sha384-B0UglyR+Haqb6LOHbgXkL8I0CgYIKdMIj8RW3Hq1iuXmoyVoIDZu0p8zvPp0fRi" 
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

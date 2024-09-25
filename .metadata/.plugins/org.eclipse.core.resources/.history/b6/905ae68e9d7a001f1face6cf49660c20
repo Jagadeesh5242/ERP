@@ -1,0 +1,45 @@
+package studentdbms.controller;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import studentdbms.entity.User;
+import studentdbms.service.userservice;
+
+@Controller
+@RequestMapping("/login")
+public class LoginController {
+
+    @Autowired
+    private userservice uss;
+
+    // Render the login page
+    @GetMapping("")
+    public String showLoginForm(Model model) {
+        // Ensure the form has a bound User object
+        model.addAttribute("theUserLogin", new User());
+        return "login";
+    }
+
+    // Handle login submission
+    @PostMapping("")
+    public String login(@ModelAttribute("theUserLogin") User user, Model model) {
+        Optional<User> existingUser = uss.findByUsername(user.getUsername());
+
+        if (existingUser.isPresent() && existingUser.get().getPassword().equals(user.getPassword())) {
+            // Redirect to the home page if login is successful
+            return "home";  // Assuming "home" is the name of your home page view
+        } else {
+            // Display error message if login fails
+            model.addAttribute("message", "Invalid username or password.");
+            return "login";
+        }
+    }
+}

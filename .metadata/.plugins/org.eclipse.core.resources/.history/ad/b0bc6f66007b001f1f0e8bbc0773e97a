@@ -1,0 +1,137 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" 
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <title>Signup</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            max-width: 500px;
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+        .container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+        }
+        .container:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 15px;
+            z-index: 0;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #0072ff;
+            z-index: 1;
+            position: relative;
+        }
+        .form-control {
+            margin-bottom: 20px;
+            padding: 12px;
+            border-radius: 8px;
+            border: 2px solid #0072ff;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            z-index: 1;
+            position: relative;
+        }
+        .form-control:focus {
+            border-color: #0056b3;
+            box-shadow: 0 0 5px rgba(0, 86, 179, 0.5);
+        }
+        .btn-custom {
+            background-color: #0072ff;
+            color: #ffffff;
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 18px;
+            border: none;
+            transition: background-color 0.3s, transform 0.3s;
+            z-index: 1;
+            position: relative;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            text-align: center;
+            color: #0072ff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        /* Responsive Styles */
+        @media (max-width: 576px) {
+            .container {
+                padding: 20px;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .btn-custom {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h2>Signup</h2>
+
+        <form th:action="@{/user/save}" th:object="${theUser}" method="POST">
+            <input type="text" name="username" class="form-control" placeholder="Username" th:field="*{username}" required>
+            <input type="password" name="password" class="form-control" placeholder="Password" th:field="*{password}" required>
+
+            <button type="submit" class="btn-custom">Sign Up</button>
+        </form>
+
+        <a href="/" class="back-link">Already have an account? Login</a>
+    </div>
+
+    <!-- Optional Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" 
+    integrity="sha384-apNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j2VMF4zvRIZFnC7BbDSP" 
+    crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" 
+    integrity="sha384-B0UglyR+Haqb6LOHbgXkL8I0CgYIKdMIj8RW3Hq1iuXmoyVoIDZu0p8zvPp0fRi" 
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

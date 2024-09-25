@@ -1,0 +1,40 @@
+package studentdbms.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import studentdbms.entity.Student;
+import studentdbms.entity.User;
+import studentdbms.service.userservice;
+
+@Controller
+@RequestMapping("/login")
+public class LoginController {
+@Autowired
+public userservice uss;
+
+@GetMapping("")
+
+
+@PostMapping("/login")
+public String login(@ModelAttribute("user") User user, Model model) {
+    Optional<User> existingUser = uss.findByUsername(user.getUsername());
+
+    if (existingUser.isPresent() && existingUser.get().getPassword().equals(user.getPassword())) {
+        //model.addAttribute("message", "Login successful!");
+        return "home";
+    } else {
+        model.addAttribute("message", "Invalid username or password.");
+        model.addAttribute("theUserLogin", new User());
+        return "login";
+    }
+}
+}

@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff7e5f, #feb47b);
+            color: #333;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 10px;
+            box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease;
+        }
+
+        .card-header {
+            background-color: #ff7e5f;
+            color: white;
+            border-radius: 10px 10px 0 0;
+            padding: 10px 15px;
+            font-weight: bold;
+        }
+
+        .btn {
+            border-radius: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-info {
+            background-color: #feb47b;
+            border: none;
+        }
+
+        .btn-info:hover {
+            background-color: #fda085;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <title>Save Course</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h3>Course Form</h3>
+            </div>
+            <div class="card-body">
+                <a th:href="@{/courses}" class="btn btn-primary btn-sm mb-3">
+                    Back to Course List
+                </a>
+
+                <p class="h4 mb-4">Save Course</p>
+
+                <form action="#" th:action="@{/courses/save}" th:object="${theCourse}" method="POST">
+                    <div class="form-group">
+                        <input type="text" th:field="*{name}" class="form-control mb-4" placeholder="Course Name" required />
+                    </div>
+                    <button type="submit" class="btn btn-info col-2">Save</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

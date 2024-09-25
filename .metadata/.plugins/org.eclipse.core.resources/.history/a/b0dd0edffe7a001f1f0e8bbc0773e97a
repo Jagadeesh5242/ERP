@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+
+    <!-- Custom CSS -->
+    <style>
+        body {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #fff !important;
+            transition: color 0.3s ease;
+        }
+
+        .navbar-brand:hover, .nav-link:hover {
+            color: #f8f9fa !important;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 30px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0px 8px 32px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        h3, h4 {
+            color: #f8f9fa;
+        }
+
+        .table {
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+        }
+
+        .btn {
+            border-radius: 20px;
+        }
+
+        /* Subtle animations */
+        .container {
+            animation: fadeIn 1.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+
+    <title>Course List</title>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" th:href="@{/home}">CourseApp</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/home}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/about}">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/contact}">Contact</a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Profile
+                    </a>
+                   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="profileDropdown">
+                        <a class="dropdown-item" th:href="@{/profile}">View Profile</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" th:href="@{/}">Logout</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h3>Course List</h3>
+        <hr>
+
+        <!-- Add Courses Button -->
+        <a th:if="${id}" th:href="@{'/students/'+${id}+'/addCourses'}" class="btn btn-primary mb-3">
+            Add Courses
+        </a>
+
+        <a th:href="@{'/courses/add'}" class="btn btn-primary mb-3">
+            Add New Course
+        </a>
+
+        <!-- Courses Table -->
+        <h4>Courses</h4>
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>S.No</th>
+                    <th>Course Name</th>
+                    <th>Actions</th>
+                    <th th:if="${add_id != null || remove_id != null}">Manage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="course : ${courses}">
+                    <td th:text="${course.id}"></td>
+                    <td th:text="${course.name}"></td>
+                    <td>
+                        <a th:href="@{'/courses/'+${course.id}}" class="btn btn-info btn-sm">View Course</a>
+                    </td>
+                    <td th:if="${add_id != null || remove_id != null}">
+                        <a th:if="${remove_id != null}" th:href="@{'/students/'+${remove_id}+'/removeCourse?cid='+${course.id}}" class="btn btn-danger btn-sm">Remove Course</a>
+                        <a th:if="${add_id != null}" th:href="@{'/students/'+${add_id}+'/addCourse?cid='+${course.id}}" class="btn btn-success btn-sm">Add Course</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <!-- Back to Student List Button -->
+        <a th:href="@{'/students'}" class="btn btn-secondary mb-3">
+            Back to Student List
+        </a>
+    </div>
+
+    <!-- Optional JavaScript -->
+  <!-- Optional JavaScript -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiXtOHR3lBM58TFAyAhrqUzQfeFf3A/NxPHlDgHuJykP5fDpoT9bUkl76PbY7" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+LyLkK3AgBXk2n7J3ntw3slVVf6B1Y5mZl5V9zVRslw0b5B37EpC7zWGI" crossorigin="anonymous"></script>
+
+</body>
+
+</html>

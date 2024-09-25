@@ -1,0 +1,144 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+    <title>Student List</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #e1f5fe, #fff);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .navbar {
+            background-color: #007bff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand,
+        .nav-link {
+            color: #fff !important;
+            font-weight: 600;
+        }
+
+        .navbar-brand:hover,
+        .nav-link:hover {
+            color: #f1f1f1 !important;
+        }
+
+        .container {
+            margin-top: 50px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        h3 {
+            color: #007bff;
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a class="navbar-brand" href="#">MyWebsite</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/students}">Students</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/courses}">Courses</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/reviews}">Reviews</a>
+                </li>
+                
+                <li class="nav-item">
+                    <a class="nav-link" th:href="@{/}">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h3>Student List</h3>
+        <hr>
+
+        <a th:href="@{/courses}" class="btn btn-primary btn-sm mb-3">View All Courses</a>
+
+        <p class="h4 mb-4">Students</p>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Student Name</th>
+                    <th>Passport</th>
+                    <th>Courses</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr th:each="temp : ${students}">
+                    <td th:text="${temp.id}"></td>
+                    <td th:text="${temp.name}"></td>
+                    <td>
+                        <p th:if="${temp.passport}" th:text="${temp.passport.number}"></p>
+                        <a th:if="!${temp.passport}" th:href="@{'/passports/add?id='+${temp.id}}">Add Passport</a>
+                    </td>
+                    <td>
+                        <a th:href="@{'/students/'+${temp.id}+'/courses'}">
+                            <p th:if="${temp.courses.isEmpty()}">Add Courses</p>
+                            <p th:if="!${temp.courses.isEmpty()}">View Courses</p>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/students/add}" class="btn btn-primary btn-sm mb-3">Add new Student</a>
+    </div>
+
+    <!-- Optional JavaScript -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
